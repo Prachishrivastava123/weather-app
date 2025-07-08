@@ -1,0 +1,212 @@
+:root {
+  /* Light theme colors */
+  --bg-primary: linear-gradient(135deg, #74b9ff 0%, #0984e3 100%);
+  --bg-secondary: rgba(255, 255, 255, 0.1);
+  --bg-card: white;
+  --bg-input: rgba(255, 255, 255, 0.9);
+  --bg-button: #0984e3;
+  --bg-button-hover: #0770c4;
+  --bg-detail: #f8f9fa;
+  --bg-detail-hover: #e9ecef;
+
+  --text-primary: #333;
+  --text-secondary: #666;
+  --text-tertiary: #888;
+  --text-light: white;
+  --text-error: #e74c3c;
+
+  --border-primary: rgba(255, 255, 255, 0.3);
+  --border-secondary: rgba(255, 255, 255, 0.2);
+  --border-input: #0984e3;
+
+  --shadow-card: 0 8px 32px rgba(0, 0, 0, 0.1);
+  --shadow-hover: 0 12px 40px rgba(0, 0, 0, 0.15);
+
+  /* Focus styles for accessibility */
+  --focus-ring: 0 0 0 3px rgba(9, 132, 227, 0.3);
+  --focus-ring-error: 0 0 0 3px rgba(231, 76, 60, 0.3);
+}
+
+[data-theme="dark"] {
+  /* Dark theme colors */
+  --bg-primary: linear-gradient(135deg, #2d3436 0%, #636e72 100%);
+  --bg-secondary: rgba(0, 0, 0, 0.3);
+  --bg-card: #2d3436;
+  --bg-input: rgba(255, 255, 255, 0.1);
+  --bg-button: #74b9ff;
+  --bg-button-hover: #0984e3;
+  --bg-detail: rgba(255, 255, 255, 0.1);
+  --bg-detail-hover: rgba(255, 255, 255, 0.2);
+
+  --text-primary: #ddd;
+  --text-secondary: #b2bec3;
+  --text-tertiary: #636e72;
+  --text-light: white;
+  --text-error: #ff7675;
+
+  --border-primary: rgba(255, 255, 255, 0.2);
+  --border-secondary: rgba(255, 255, 255, 0.1);
+  --border-input: #74b9ff;
+
+  --shadow-card: 0 8px 32px rgba(0, 0, 0, 0.3);
+  --shadow-hover: 0 12px 40px rgba(0, 0, 0, 0.4);
+}
+
+/* Screen reader only content */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Focus styles for accessibility */
+*:focus {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+
+button:focus,
+input:focus,
+[role="button"]:focus,
+[role="tab"]:focus {
+  outline: 2px solid var(--border-input);
+  outline-offset: 2px;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  :root {
+    --shadow-card: 0 2px 8px rgba(0, 0, 0, 0.5);
+    --shadow-hover: 0 4px 12px rgba(0, 0, 0, 0.6);
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",
+    "Droid Sans", "Helvetica Neue", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: var(--bg-primary);
+  min-height: 100vh;
+  color: var(--text-primary);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.app-header {
+  background: var(--bg-secondary);
+  backdrop-filter: blur(10px);
+  padding: 1rem 2rem;
+  border-bottom: 1px solid var(--border-secondary);
+}
+
+.app-header h1 {
+  color: var(--text-light);
+  text-align: center;
+  margin-bottom: 1rem;
+  font-size: 2.5rem;
+  font-weight: 300;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin: 0;
+}
+
+.app-main {
+  flex: 1;
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.weather-content {
+  display: grid;
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+@media (max-width: 768px) {
+  .app-header {
+    padding: 1rem;
+  }
+
+  .app-header h1 {
+    font-size: 2rem;
+  }
+
+  .app-main {
+    padding: 1rem;
+  }
+
+  .weather-content {
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+}
+
+/* Loading and Error States */
+.loading,
+.error,
+.no-data {
+  text-align: center;
+  padding: 2rem;
+  border-radius: 12px;
+  background: var(--bg-card);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  color: var(--text-primary);
+}
+
+.loading {
+  color: #666;
+}
+
+.error {
+  color: var(--text-error);
+  background: var(--bg-card);
+  border: 1px solid var(--text-error);
+  background: #ffeaea;
+  border: 1px solid #f5c6cb;
+}
+
+.no-data {
+  color: #666;
+}
+
+.no-data h3 {
+  margin-bottom: 0.5rem;
+  color: #333;
+}
+
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
